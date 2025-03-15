@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for markdown content */
+.prose-invert {
+  color: #e2e8f0;
+}
+
+.prose-invert a {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+.prose-invert a:hover {
+  color: #60a5fa;
+}
+
+.prose-invert code {
+  color: #fca5a5;
+  background-color: rgba(31, 41, 55, 0.5);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.prose-invert pre {
+  background-color: #1e293b;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  padding: 1rem;
+}
+
+.prose-invert pre code {
+  color: #e2e8f0;
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose-invert blockquote {
+  border-left-color: #4b5563;
+  color: #9ca3af;
+}
+
+.prose-invert table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.prose-invert th {
+  background-color: #374151;
+  padding: 0.5rem;
+  text-align: left;
+  font-weight: 600;
+}
+
+.prose-invert td {
+  padding: 0.5rem;
+  border-top: 1px solid #4b5563;
+}
+
+.prose-invert hr {
+  border-color: #4b5563;
+  margin: 1.5rem 0;
+}
+
+/* Custom scrollbar for the chat container */
+.overflow-y-auto::-webkit-scrollbar {
+  width: 6px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb {
+  background-color: #4b5563;
+  border-radius: 3px;
+}
+
+.overflow-y-auto::-webkit-scrollbar-thumb:hover {
+  background-color: #6b7280;
+}
