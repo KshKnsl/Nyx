@@ -77,7 +77,7 @@ export default function Chat() {
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-800 to-indigo-900 p-4 shadow-md">
         <h2 className="text-2xl font-bold text-center">Nyx Chat</h2>
-        <p className="text-center text-gray-300 text-sm">Powered by Gemini AI</p>
+        <p className="text-center text-gray-300 text-sm">Powered by DeepSeek</p>
       </div>
 
       {/* Messages Area */}
