@@ -1,25 +1,38 @@
 import { useState } from "react";
 import axios from "axios";
 
+// Automatically determine the API URL based on the current environment
+const API_URL = import.meta.env.PROD 
+  ? window.location.origin.replace('://nt-', '://nt-api-')  // Production: Replace frontend URL prefix with backend
+  : "http://localhost:5000";  // Development
+
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!input.trim()) return;
 
     const userMessage = { sender: "You", text: input };
     setMessages([...messages, userMessage]);
+    setIsLoading(true);
 
     try {
-      const response = await axios.post("http://127.0.0.1:5000/chat", {
+      const response = await axios.post(`${API_URL}/chat`, {
         message: input,
       });
 
       const botMessage = { sender: "Nyx", text: response.data.response };
       setMessages((prev) => [...prev, botMessage]);
     } catch (error) {
-      setMessages((prev) => [...prev, { sender: "Nyx", text: "Error fetching response" }]);
+      console.error('Chat error:', error);
+      setMessages((prev) => [...prev, { 
+        sender: "Nyx", 
+        text: "Error fetching response. Please try again later." 
+      }]);
+    } finally {
+      setIsLoading(false);
     }
 
     setInput("");
