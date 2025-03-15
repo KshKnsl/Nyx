@@ -5,10 +5,10 @@ import os
 
 app = Flask(__name__)
 
-# Configure CORS to allow requests from any Vercel deployment and localhost
+# Configure CORS to allow requests from any origin for Railway deployment
 CORS(app, resources={
     r"/*": {
-        "origins": ["*"],  # Allow all origins (Vercel will handle security)
+        "origins": ["*"],  # Allow all origins for now, we'll update this after deployment
         "methods": ["GET", "POST", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization"],
         "expose_headers": ["Content-Range", "X-Content-Range"]
@@ -37,4 +37,5 @@ def health_check():
     return jsonify({"status": "healthy", "message": "Nyx Chat API is running"})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)

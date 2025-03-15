@@ -1,10 +1,10 @@
 import { useState } from "react";
 import axios from "axios";
 
-// Automatically determine the API URL based on the current environment
-const API_URL = import.meta.env.PROD 
-  ? window.location.origin.replace('://nt-', '://nt-api-')  // Production: Replace frontend URL prefix with backend
-  : "http://localhost:5000";  // Development
+// Use environment variable or fallback to a default URL
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Remove the hardcoded Vercel URL
+// const API_URL = "https://backend-o96m9m40p-kush-kansals-projects.vercel.app";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
@@ -21,6 +21,10 @@ export default function Chat() {
     try {
       const response = await axios.post(`${API_URL}/chat`, {
         message: input,
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+        }
       });
 
       const botMessage = { sender: "Nyx", text: response.data.response };
