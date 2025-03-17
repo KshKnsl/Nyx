@@ -52,7 +52,12 @@ jobs:
       - name: Install dependencies
         run: |
           cd backend
-          pip install -r requirements.txt || echo "Some dependencies could not be installed"
+          if grep -q "langchain-google-genai" requirements.txt; then
+            echo "langchain-google-genai dependency found, attempting to install..."
+            pip install -r requirements.txt || echo "Some dependencies could not be installed"
+          else
+            pip install -r requirements.txt
+          fi
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
