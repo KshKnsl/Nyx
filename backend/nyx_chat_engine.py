@@ -120,9 +120,19 @@ Your responses should be well-structured, visually appealing, and easy to read."
         
         self.chain = prompt | self.llm
 
+    def clear_memory(self):
+        """Clear the conversation memory."""
+        self.memory = ConversationBufferMemory(
+            return_messages=True
+        )
+        print("Memory cleared - model has forgotten previous conversations")
+
     def chat(self, user_input: str) -> str:
         """Process user input and return response."""
         try:
+            # Clear memory before each interaction to forget previous conversations
+            self.clear_memory()
+            
             response = self.chain.invoke({
                 "name": self.persona.name,
                 "traits": str(self.persona.traits),
@@ -131,7 +141,8 @@ Your responses should be well-structured, visually appealing, and easy to read."
                 "input": user_input
             })
             
-            # Update memory
+            # We still add the current interaction to memory
+            # but it will be cleared on the next request
             self.memory.chat_memory.add_user_message(user_input)
             self.memory.chat_memory.add_ai_message(response.content)
             

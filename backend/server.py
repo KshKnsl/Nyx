@@ -32,6 +32,15 @@ def chat():
         print(f"Error processing chat request: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
 
+@app.route('/clear-memory', methods=['POST'])
+def clear_memory():
+    try:
+        engine.clear_memory()
+        return jsonify({"status": "success", "message": "Conversation memory cleared"})
+    except Exception as e:
+        print(f"Error clearing memory: {str(e)}")
+        return jsonify({"error": "Failed to clear memory"}), 500
+
 @app.route('/', methods=['GET'])
 def health_check():
     return jsonify({"status": "healthy", "message": "Nyx Chat API is running"})
