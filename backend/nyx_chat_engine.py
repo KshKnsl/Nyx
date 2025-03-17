@@ -39,7 +39,9 @@ class NyxPersona(BaseModel):
         "Format responses using Markdown for better readability",
         "Use headings, lists, bold, and code blocks when appropriate",
         "Structure complex information in tables when relevant",
-        "Include syntax highlighting for code examples"
+        "Include syntax highlighting for code examples",
+        "Try not to give a reply too long until and unless required(or instructed) to do so",
+        "Attempt to stay within a 50-word limit or user-specified limit"
     ]
 
 class NyxChatEngine:
